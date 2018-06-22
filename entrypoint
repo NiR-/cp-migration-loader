@@ -1,0 +1,8 @@
+#!/bin/sh
+
+set -o nounset
+set -o errexit
+
+dockerize -wait tcp://${DATABASE_HOST}:3306
+
+/app/bin/console --env=prod doctrine:migrations:migrate --no-interaction
